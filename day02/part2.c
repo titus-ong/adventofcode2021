@@ -6,9 +6,7 @@ int main ()
 {
     int maxSize = 11; // max 7 chars + space + 1 digit + 2 extra bytes for newline
     char *baseInstruction = malloc(maxSize);
-    char *instruction;
-    char *direction = malloc(7);
-    char *distance = malloc(3);
+    char *instruction, *direction, *distance;
 
     int horizontal = 0;
     int depth = 0;
@@ -23,8 +21,8 @@ int main ()
     while (!feof(input))
     {
         instruction = baseInstruction;
-        strcpy(direction, strsep(&instruction, " "));
-        strcpy(distance, strsep(&instruction, " "));
+        direction = strsep(&instruction, " ");
+        distance = strsep(&instruction, " ");
         numDistance = atoi(distance);
 
         if (strcmp(direction, "forward") == 0)
@@ -42,9 +40,6 @@ int main ()
     }
     
     free(baseInstruction);
-    free(instruction);
-    free(direction);
-    free(distance);
     fclose(input);
 
     printf("Final horizontal position multiplied by final depth: %d", horizontal*depth);
